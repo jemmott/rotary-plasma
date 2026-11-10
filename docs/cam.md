@@ -48,7 +48,7 @@ measured along the branch from the point nearest the header centerline.
 - `X0` is the finished long point of the part. The path extends half a kerf past it, so leave stock beyond X0.
 - The cut starts at the deepest point of the cope with a straight lead-in from the scrap side, then makes one full turn with A increasing.
 - `M3 $0 S1` and `M5 $0` start and stop the torch, as QtPlasmaC expects. No Z moves are written; the controller handles probing and height.
-- Cutting moves use `G93` inverse-time feed so that speed is correct at the tube surface. See [design.md](design.md) section 3.4 for why, and for the open question of whether QtPlasmaC accepts it.
+- Cutting moves use `G93` inverse-time feed so that speed is correct at the tube surface. See [design.md](design.md) section 3.5 for why, and for the open question of whether QtPlasmaC accepts it.
 - Which way positive A turns is a machine setting. If the first paper test comes out mirrored, flip the A direction in the controller, not in the tool.
 
 ## Validation plan
