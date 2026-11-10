@@ -85,6 +85,29 @@ Cutting current must not return through the slewing ring or the roller bearings:
 
 Fusion's plasma operations do not handle geometry wrapped around a tube. See [cam.md](cam.md).
 
+### 3.8 Staged build: budget v1 first. Proposed.
+
+The full-spec machine came out near $2,600, more than hoped. The proposal is to build a cheaper v1 that covers most of the real work, and keep the full spec as an upgrade path.
+
+| | v1 (budget, about $1,200) | v2 (full spec, about $2,600) |
+|---|---|---|
+| Shapes | round only | round, square, rectangular |
+| Max round OD | 3" | 4" |
+| Headstock | 10" three-jaw lathe chuck (80 mm bore) on a routed ring and rollers, belt drive | slewing ring, V-jaws, insert plates |
+| Axes | X, A, Z | X, Y, A, Z |
+| Motors | open-loop steppers | closed-loop steppers |
+| Torch height | float-switch touch-off, then fixed height | plus arc-voltage control (THCAD2) |
+| X guide | V-wheels on aluminum extrusion | linear rails and ball screw |
+
+Why this split:
+
+- **Round only** is the big saving. It removes the Y axis, the square-tube steady, the insert plates, and the square-tube CAM work, and it lets a self-centering lathe chuck do the gripping, which is also the fastest thing to load.
+- **3" instead of 4"** saves almost nothing by itself. Its value is that 3" tube fits through a commodity 10" chuck (80 mm bore). An 8" chuck is about $100 cheaper but its 65 mm bore leaves only 1.5 mm around 2.5" tube, which is too tight for bowed stock.
+- **Fixed-height cutting** is reasonable to start with because the tube is clamped and supported close to the cut. Arc-voltage control is a $79 add-on later if thin tube shows it is needed.
+- The controller card, PC, frame, gantry layout, and CAM tool carry over to v2 unchanged.
+
+The common sizes (below) all fit v1.
+
 ## 4. Sizing notes
 
 - **Bore:** 4" round needs about 102 mm, plus room for jaws to open. Target a clear bore of 130 mm or more.
@@ -96,13 +119,17 @@ Fusion's plasma operations do not handle geometry wrapped around a tube. See [ca
 
 ## 5. Open questions
 
+Answered by the owner (2026-11-10):
+
+- **Clocking between ends of long parts** is done by hand with an indicator and a level after advancing the stick. No feed gripper needed.
+- **Common stock:** round tube, 1", 1.5", 2", and 2.5" OD. Wall mostly 0.090" or 1/8", sometimes 16 gauge. Pipe is rare. 20 ft sticks are standard.
+- **Parts catching:** not needed.
+- **License:** MIT for software, CERN-OHL-P v2 for hardware.
+
 For the owner:
 
-1. **Part length versus the 18" cut zone.** A part coped at both ends that is longer than the torch travel must be released, advanced, and re-clamped between ends. Nothing then keeps the two copes clocked to each other on round tube. Options: longer X travel, a non-rotating feed gripper, a scribed witness line, or accept hand-clocking. What part lengths are typical?
-2. **Y axis for square tube** (section 3.3): yes or no?
-3. **License.** CERN-OHL-P or CERN-OHL-S for hardware and MIT for software are the usual choices.
-4. **Common sizes and walls.** Which three or four tube sizes are most of the volume? This sets jaw design and which insert plates to draw first.
-5. **Parts catching.** Should cut parts drop into a bin, or be supported until unloaded? Long parts will sag and pinch the kerf at the end of the cut.
+1. **v1 scope** (section 3.8): round only, 3" max, as a first build?
+2. **Y axis for square tube** (section 3.3): only matters for v2.
 
 Engineering:
 

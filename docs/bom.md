@@ -68,6 +68,49 @@ Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
 
 Dropping the Y axis saves about $135.
 
+## Budget v1: round only, 3" max
+
+See [design.md](design.md) section 3.8. Rough total **$1,200**. Same caveat: only "Checked" prices were read from a seller's page.
+
+| Item | Qty | Each | Total | Price status |
+|---|---|---|---|---|
+| Mesa 7i96S | 1 | $149 | $149 | Checked |
+| Open-loop NEMA 23 stepper with digital driver (X, Z, A) | 3 | $35 | $105 | Estimate |
+| NEMA 23 planetary gearbox for A | 1 | $27 | $27 | Checked (via search result) |
+| 48 V power supply | 1 | $35 | $35 | Estimate |
+| PC: spare or used | 1 | $60 | $60 | Estimate |
+| E-stop, relay, home switches, wiring | 1 | $80 | $80 | Estimate |
+| Float switch for touch-off (printed, with a microswitch) | 1 | $10 | $10 | Estimate |
+| CPC plug and wire, self-assembled | 1 | $20 | $20 | Estimate |
+| **Controller subtotal** | | | **$486** | |
+| K11-250 10" three-jaw chuck, 80 mm bore | 1 | $200 | $200 | Estimate. The 8" K11-200 was $102 to $142 (checked), no US price found for the 10". |
+| V-groove bearings, timing belt, pulley for the rotating ring | 1 | $60 | $60 | Estimate |
+| Plate for ring and mount | 1 | $40 | $40 | Estimate |
+| Rotary ground clamp | 1 | $40 | $40 | Estimate |
+| **Headstock subtotal** | | | **$340** | |
+| X: aluminum V-slot extrusion, wheels, belt | 1 | $70 | $70 | Estimate |
+| Z slide, about 4" travel | 1 | $40 | $40 | Estimate |
+| Printed magnetic breakaway torch mount | 1 | $10 | $10 | Estimate |
+| **Gantry subtotal** | | | **$120** | |
+| Steel for frame | 1 | $150 | $150 | Estimate; less from the scrap rack |
+| Roller stands built from skate bearings | 4 | $10 | $40 | Estimate |
+| Steady rollers, tray, shields, fasteners | 1 | $70 | $70 | Estimate |
+| **Frame subtotal** | | | **$260** | |
+| **Total** | | | **$1,206** | |
+
+Later add-ons: THCAD2 arc-voltage height control ($79, checked), closed-loop motors (about $40 more per axis).
+
+Where the $1,400 saving comes from:
+
+| Change | Saves about |
+|---|---|
+| Lathe chuck on a routed ring instead of slewing ring and built jaws | $375 |
+| Open-loop motors, three axes instead of four | $185 |
+| No arc-voltage control or ohmic sensing at first; self-made cable | $190 |
+| V-wheel X axis, cheaper Z, printed torch mount | $240 |
+| Frame from stock, shop-built roller stands | $290 |
+| Cheaper PC and wiring allowance | $110 |
+
 ## To confirm before buying
 
 1. Slewing ring: supplier drawing with bore, outside diameter, height, gear module and tooth count, bolt patterns, and runout. This choice drives the pinion, the faceplate, and the motor mount.

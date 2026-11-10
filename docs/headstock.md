@@ -47,9 +47,15 @@ A routed aluminum ring, 3/8" or thicker, rides on three or four V-groove rollers
 
 Hollow chucks sold for plasma pipe cutting. Bulltear's Rotacut with an 8" four-jaw chuck was listed at $988 to $1,400 in an undated forum post; Precision Plasma sells one without a listed price. Units with a full 4" through-bore are uncommon. Worth one more look before committing to A, since it could save weeks.
 
-### E. Lathe chuck on a hollow spindle. Rejected.
+### E. Lathe chuck on a hollow spindle. Rejected for 4", proposed for the budget v1.
 
 A 4" through-bore needs a chuck of 12" or more, weighing over 100 lb, and a machined spindle and backplate.
+
+At 3" maximum and round tube only, this changes. A commodity K11-250 10" three-jaw chuck has an 80 mm (3.15") bore and self-centers with one key, which is the fastest loading of any option here. K11-200 8" chucks (65 mm bore) were listed at $102 to $142; the 10" size had no US price in the listings found and is estimated at about $200. It weighs roughly 55 lb.
+
+No spindle is needed: the chuck bolts by its back face to a routed plate ring, and that ring is the rotating element, riding on V-rollers with a belt drive (concept C) or bolted to a smaller slewing ring (concept A). The chuck's own runout then matters less than how well the ring is centered on the chuck, which can be shimmed or dialed in once with an indicator.
+
+A three-jaw scroll chuck does not hold square or rectangular tube, so this is a round-only choice. See [design.md](design.md) section 3.8.
 
 ## Gripping concepts
 
@@ -85,5 +91,7 @@ See [design.md](design.md) section 3.3 for the indexed versus continuous compari
 - [VXB external gear turntable bearings 011.10.100 / 120 / 150](https://vxb.com/products/external-gear-turntable-bearings-01110100-01110120)
 - [igus PRT slewing ring bearings](https://www.igus.eu/prt/slewing-ring-bearings)
 - [igus PRT-01-200 at Zoro](https://zoro.com/igus-slewing-ring-bearing-rpm-80-prt-01-200/i/G8000702)
+- [K11-200 chuck, 65 mm bore, Nassau Electrical](https://www.nassauelectrical.com/products/k11-200a-8-self-centering-steel-lathe-chuck-for-versatile-machinery)
+- [VEVOR K11-250 chuck, 80 mm bore](https://woodartsupply.com/a/s/products/vevor-3-jaw-lathe-chuck-10-self-centering-lathe-chuck-0-24-9-84-in-6-250-mm-clamping-range-with-t-key-fixing-screws-hexagon-wrench-for-lathe-3d-printer-machining-center-milling-drilling-machine)
 - [Bulltear Rotacut forum post](https://forum.bulltear.com/d/37775--otary-axis-from-ulltear-the-quot-quot--dup2)
 - [Precision Plasma rotary chuck](https://en.industryarena.com/forum/precision-plasma-llc-6-rotary-chuck-cnc-plasma-cutting--105914.html)

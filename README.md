@@ -45,3 +45,7 @@ examples/   generated sample output
 ```
 
 CAD, controller config, and build instructions will get their own folders when they exist.
+
+## License
+
+Software is MIT ([LICENSE](LICENSE)). Hardware designs and documentation are [CERN-OHL-P v2](https://ohwr.org/cern_ohl_p_v2.txt); the full license text still needs to be added to the repo before publishing.
