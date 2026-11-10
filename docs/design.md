@@ -2,25 +2,31 @@
 
 Last updated 2026-11-10. Status: nothing built yet.
 
-Each decision below is marked **Decided**, **Proposed** (a recommendation waiting for a yes), or **Open**.
+Each decision is marked **Decided**, **Proposed** (a recommendation waiting for a yes), or **Open**.
+
+Guiding rule from the owner: **boring, default parts.** Prefer the common catalog item over the clever one.
 
 ## 1. Requirements
 
 | Requirement | Value |
 |---|---|
-| Round tube | up to 4" OD, continuous rotation |
-| Square / rectangular tube | up to 2" |
+| Shape | round tube only |
+| Size | up to 3" OD. Common: 1", 1.5", 2", 2.5" |
+| Wall | mostly 0.090" and 1/8", sometimes 16 gauge |
 | Materials | steel, aluminum |
-| Stock | up to 20 ft sticks passing through the headstock (a 4" x 1/4" wall steel stick weighs about 200 lb) |
+| Stock | 20 ft sticks passing through the headstock (3" x 1/8" wall steel is about 77 lb per stick) |
 | Cut zone | 18" of torch travel along the tube at minimum |
 | Torch | radial (always points at the tube centerline), no bevel |
 | Plasma source | Hypertherm Powermax45 XP, machine torch, CPC port |
-| Fabrication | plasma-cut plate (CrossFire Pro), 33" x 33" CNC router, Bambu P1S prints, MIG/TIG, bolt-together. No lathe. Outsourced parts are acceptable where needed. |
+| Fabrication | plasma-cut plate (CrossFire Pro), 33" x 33" CNC router, Bambu P1S prints, MIG/TIG, bolt-together. No lathe. |
 | Controller | standalone and open. Not a Langmuir/FireControl add-on. |
 | Use | high volume, so loading and repeat cuts should be quick |
+| Budget | about $1,200 excluding the plasma cutter |
 | Publication | open source, reproducible by someone with a similar shop |
 
-Accuracy target (proposed): cut edge within ±0.5 mm (0.020") of intended, so copes fit up for welding with no grinding. Kerf is about 1.5 mm, so this is realistic for plasma.
+Not required: square or rectangular tube, 4" tube, parts catching, automatic clocking between the two ends of a long part (done by hand with an indicator and a level).
+
+Accuracy target (proposed): cut edge within ±0.5 mm (0.020") of intended, so copes fit up for welding with no grinding.
 
 ## 2. Architecture
 
@@ -28,133 +34,99 @@ Accuracy target (proposed): cut edge within ±0.5 mm (0.020") of intended, so co
  infeed roller stands        headstock        cut zone (18"+)          outfeed support
  ====o========o=============[  chuck  ]--o----------------------o=========
       20 ft stick passes     rotates A   ^ steady    torch on X / Z gantry
-      through                            rollers     (plus short Y, proposed)
-                                         slag tray below
+      through                            rollers     slag tray below
 ```
 
-- **Headstock (A axis):** a hollow rotating ring with a chuck on its face. The tube passes through the bore and is clamped close to the cut. See [headstock.md](headstock.md).
+- **Headstock (A axis):** a three-jaw lathe chuck on a hollow rotating mount. The tube passes through and is clamped close to the cut. See [headstock.md](headstock.md).
 - **Steady rollers:** support the tube just past the chuck. They carry weight and do not drive.
 - **Gantry:** carries the torch along the tube (X) and up and down (Z). The tube does not move axially during a cut.
 - **Infeed and outfeed stands:** carry the rest of the stick while it rotates.
-- **Controller:** LinuxCNC with QtPlasmaC on a PC, Mesa 7i96S Ethernet card, stepper drives.
+- **Controller:** LinuxCNC with QtPlasmaC on a PC, Mesa 7i96S Ethernet card, open-loop stepper drives.
 - **CAM:** our own tool, [cam.md](cam.md).
 
 ## 3. Decisions
 
-### 3.1 Headstock: geared slewing ring. Proposed.
+### 3.1 Scope: round only, 3" max. Decided.
 
-A slewing ring is a large bearing with bolt holes in both races and gear teeth on one. It bolts to flat plate, so nothing needs to be turned on a lathe, and it gives a large bore, the bearing, and the final drive gear in one purchased part. Comparison and costs in [headstock.md](headstock.md).
+Round only removes a fourth axis and all square-tube handling, and lets a self-centering lathe chuck do the gripping. 3" is the largest tube that fits a commodity 10" chuck.
 
-### 3.2 Chuck: two self-centering V-jaws, plus profile insert plates. Proposed.
+### 3.2 Chuck: K11-250 10" three-jaw self-centering lathe chuck, 80 mm bore. Proposed.
 
-Two V-jaws on one left/right-hand screw center round tube of any size with one handwheel, and hold square tube by its corners. For rectangular tube, and for high-volume runs of one size, a plasma-cut plate with the tube's profile cut into it bolts to the faceplate and drives the tube by its flats. Details in [headstock.md](headstock.md).
+One key, self-centering, a standard part sold everywhere. About 55 lb. An 8" chuck is cheaper but its 65 mm bore is too tight for 2.5" tube.
 
-### 3.3 Square and rectangular tube: add a short Y axis. Proposed, and it changes the "3 axes are enough" assumption.
+### 3.3 How the chuck rotates. Open, and the main thing left to settle.
 
-Three axes are enough for round tube. For square tube they give a poor cut, for this reason:
+The chuck needs a hollow bearing and a drive behind it, with no lathe work. Candidates, in [headstock.md](headstock.md): a small slewing ring bolted to the chuck's back, a purchased hollow rotary table, or a routed ring on V-rollers with a belt. The first two are the boring catalog parts and are preferred if the price is acceptable; they need quotes.
 
-With the torch fixed over the centerline, the torch is square to a flat face only at the middle of that face. As the tube turns, the torch meets the face at an increasing angle, reaching 45° at the corners of a square tube and more on the short side of a rectangle. The cut edge comes out bevelled by that angle, and the arc has to go through up to 41% more metal. Surface speed also swings widely as corners go past.
+### 3.4 Motion: open-loop NEMA 23 steppers, three axes. Decided.
 
-| Approach | Axes | Cut quality on flats | Corners | Notes |
-|---|---|---|---|---|
-| Continuous rotation, Z follows the surface | X, A, Z | Bevelled edge, 0° at mid-face up to 45° near corners | Cut on the fly | Z must move 0.41" per quarter turn on 2" square. Simplest machine. |
-| Indexed: face up, cut it flat, turn 90° | X, Y, A, Z | Same as cutting flat plate | Torch off between faces, or rolled (below) | Needs Y travel of the tube width plus margin |
-| Indexed faces with rolled corners | X, Y, A, Z | Same as flat plate | Tube turns while Y and Z track the corner, torch stays lit | What commercial tube machines do. Most CAM work. |
+X on V-wheels and aluminum extrusion with a belt; Z on a small purchased slide. Both are standard hobby CNC parts.
 
-Recommendation: build the gantry with about 4" of Y travel from the start. It costs roughly $60 and one more motor, the 7i96S has five step/dir outputs so there is room, and it lets square tube be cut face by face. Start with indexed faces with the torch off between them, and add rolled corners later in software. If Y is rejected, continuous rotation with Z following is the fallback and the bevel is accepted.
+### 3.5 Controller: LinuxCNC + QtPlasmaC + Mesa 7i96S. Proposed, with known gaps.
 
-### 3.4 Controller: LinuxCNC + QtPlasmaC + Mesa 7i96S. Proposed, with known gaps.
+It is the only open controller with mature plasma support. Known gaps, found on the LinuxCNC forum on 2026-11-10 and not yet tested by us:
 
-It is the only open controller with mature plasma support (torch height control, probing, pierce sequencing). Known gaps, found on the LinuxCNC forum on 2026-11-10 and not yet tested by us:
+- **QtPlasmaC is built for flat tables.** Forum users report it is "not set up for 4-axis tube cutting" and work around it. Expect configuration work.
+- **Feed rate.** LinuxCNC computes feed from linear axes only and ignores rotation when both move. The usual fix is inverse-time feed (G93), which our CAM tool emits. Whether QtPlasmaC accepts G93 moves is untested.
 
-- **QtPlasmaC is built for flat tables.** Forum users report it is "not set up for 4-axis tube cutting" and work around it. Expect configuration work, not a stock install.
-- **Feed rate.** LinuxCNC computes feed from linear axes only and ignores rotation when both move. A move that is mostly rotation would run far too fast at the tube surface. The usual fix is inverse-time feed (G93), which our CAM tool emits. Whether QtPlasmaC's G-code filter and its velocity-based torch height hold work with G93 moves is untested.
-- **Torch height control during rotation** needs testing for the same reason: the controller's idea of cutting speed does not include rotation.
+The fallback is plain LinuxCNC with a small custom torch-control component. The hardware stays the same.
 
-The fallback if QtPlasmaC fights us is plain LinuxCNC with a small custom torch-control component. The motion hardware stays the same.
+### 3.6 Torch height: float-switch touch-off, then fixed height. Decided for the first build.
 
-### 3.5 Torch height: ohmic or float-switch probing for start height, arc voltage via THCAD2 while cutting. Proposed.
+The tube is clamped and supported close to the cut, so height should hold. Arc-voltage control (Mesa THCAD2, $79) is an add-on if thin tube shows it is needed.
 
-Round tube that runs true could be cut at a fixed height, but real tube is bowed and jaws are not perfect, so height control is worth having. The Powermax45 XP's CPC port provides a divided arc voltage through a selectable divider card; the divider setting and the matching THCAD2 range still need to be confirmed against the Hypertherm and Mesa manuals.
+### 3.7 Work lead: dedicated rotating ground. Decided.
 
-### 3.6 Work lead: dedicated rotating ground. Decided.
+Cutting current must not return through the headstock bearing or the rollers: arcing pits bearing races. Use a rotary ground clamp or a sprung copper brush on the tube or chuck body.
 
-Cutting current must not return through the slewing ring or the roller bearings: arcing pits bearing races quickly. Use a rotary ground clamp or a sprung copper brush riding on the tube or chuck body, and electrically consider the bearing path as something to avoid.
-
-### 3.7 CAM: own tool. Decided.
+### 3.8 CAM: own tool. Decided.
 
 Fusion's plasma operations do not handle geometry wrapped around a tube. See [cam.md](cam.md).
 
-### 3.8 Staged build: budget v1 first. Proposed.
+### 3.9 License. Decided.
 
-The full-spec machine came out near $2,600, more than hoped. The proposal is to build a cheaper v1 that covers most of the real work, and keep the full spec as an upgrade path.
-
-| | v1 (budget, about $1,200) | v2 (full spec, about $2,600) |
-|---|---|---|
-| Shapes | round only | round, square, rectangular |
-| Max round OD | 3" | 4" |
-| Headstock | 10" three-jaw lathe chuck (80 mm bore) on a routed ring and rollers, belt drive | slewing ring, V-jaws, insert plates |
-| Axes | X, A, Z | X, Y, A, Z |
-| Motors | open-loop steppers | closed-loop steppers |
-| Torch height | float-switch touch-off, then fixed height | plus arc-voltage control (THCAD2) |
-| X guide | V-wheels on aluminum extrusion | linear rails and ball screw |
-
-Why this split:
-
-- **Round only** is the big saving. It removes the Y axis, the square-tube steady, the insert plates, and the square-tube CAM work, and it lets a self-centering lathe chuck do the gripping, which is also the fastest thing to load.
-- **3" instead of 4"** saves almost nothing by itself. Its value is that 3" tube fits through a commodity 10" chuck (80 mm bore). An 8" chuck is about $100 cheaper but its 65 mm bore leaves only 1.5 mm around 2.5" tube, which is too tight for bowed stock.
-- **Fixed-height cutting** is reasonable to start with because the tube is clamped and supported close to the cut. Arc-voltage control is a $79 add-on later if thin tube shows it is needed.
-- The controller card, PC, frame, gantry layout, and CAM tool carry over to v2 unchanged.
-
-The common sizes (below) all fit v1.
+MIT for software, CERN-OHL-P v2 for hardware.
 
 ## 4. Sizing notes
 
-- **Bore:** 4" round needs about 102 mm, plus room for jaws to open. Target a clear bore of 130 mm or more.
-- **A-axis speed:** surface speed equals cut speed. 1" OD tube cut at 150 in/min turns at 48 rpm; 4" OD at 60 in/min turns at 5 rpm. Small thin tube sets the top speed.
-- **A-axis ratio:** about 25:1 from motor to ring is a reasonable start (for example a 5:1 gearbox and a 5:1 pinion-to-ring ratio). That puts 48 rpm at 1200 motor rpm, and one 1/8-microstep at 0.0003" on the surface of a 4" tube.
-- **Backlash:** a 30 arc-minute gearbox behind a 5:1 ring stage contributes 0.1° at the tube, which is 0.0035" at the surface of a 4" tube. Gear mesh adds to this. Both are small next to the kerf, but direction reversals mid-cut should still be avoided.
-- **Z travel:** 4" for the tube size range plus clearance; 6" is comfortable.
-- **X travel:** 24" gives the 18" cut zone plus room for lead-ins and parking.
+- **A-axis speed:** surface speed equals cut speed. 1" tube cut at 150 in/min turns at 48 rpm; 3" at 60 in/min turns at 6 rpm. Small thin tube sets the top speed.
+- **A-axis ratio:** about 20:1 to 25:1 from motor to chuck. At 25:1, 48 rpm is 1200 motor rpm, which is near the limit for an open-loop stepper on 48 V; 16 gauge on 1" tube may need a lower ratio or a slower cut. To be checked when the drive is chosen.
+- **Resolution:** at 25:1 and 1/8 microstepping, one step is 0.0002" on the surface of a 3" tube.
+- **Z travel:** 4" covers 1" to 3" tube with clearance.
+- **X travel:** 24" gives the 18" cut zone plus lead-ins and parking.
 
 ## 5. Open questions
 
-Answered by the owner (2026-11-10):
-
-- **Clocking between ends of long parts** is done by hand with an indicator and a level after advancing the stick. No feed gripper needed.
-- **Common stock:** round tube, 1", 1.5", 2", and 2.5" OD. Wall mostly 0.090" or 1/8", sometimes 16 gauge. Pipe is rare. 20 ft sticks are standard.
-- **Parts catching:** not needed.
-- **License:** MIT for software, CERN-OHL-P v2 for hardware.
-
-For the owner:
-
-1. **v1 scope** (section 3.8): round only, 3" max, as a first build?
-2. **Y axis for square tube** (section 3.3): only matters for v2.
+For the owner: see the list in the README of things needed before the design is locked.
 
 Engineering:
 
-6. Does QtPlasmaC accept G93 inverse-time moves with torch height control active? (section 3.4)
-7. THCAD2 range and Powermax divider setting.
-8. Does ohmic sensing work reliably on a rotating tube with mill scale, or is a float switch better?
-9. Supporting rotating square tube: rollers under a turning square tube bounce. Likely needs a second passive ring with a profile insert as a steady.
-10. Slewing ring selection: actual bore, gear module, runout, and price need a supplier quote. See [bom.md](bom.md).
-11. Slag and fume: water tray under the cut zone, and sparks blown down the inside of the tube toward the headstock.
-12. A-axis homing and a repeatable zero for clocking multiple cuts on one part.
+1. Rotating mount for the chuck (section 3.3): quotes and choice.
+2. Does QtPlasmaC accept G93 inverse-time moves?
+3. Open-loop stepper speed for small thin tube (section 4).
+4. A-axis home and a repeatable zero.
+5. Slag and fume: water tray under the cut zone; sparks blown down the inside of the tube toward the chuck.
+6. Outfeed support that lets a finished part be removed easily.
 
 ## 6. Roadmap
 
 1. CAM spike: round-on-round cope, G-code and paper template. **Done** (untested on hardware).
 2. Validate the template by hand: print, wrap, cut, and fit a real joint.
-3. Pick the slewing ring and build the headstock alone. Check runout and backlash with a pen in place of the torch, drawing on paper wrapped around a tube.
-4. Gantry, controller, and first cuts on round tube.
-5. Square tube.
-6. CAM: full parts (two ends, clocking, length), holes and slots, STEP import.
+3. Settle the rotating mount; lock the design.
+4. Build the headstock alone. Check runout with an indicator, and accuracy with a pen in place of the torch drawing on paper wrapped around a tube.
+5. Gantry, controller, first cuts.
+6. CAM: full parts (two ends and length), straight and miter cuts, holes and slots, STEP import.
 7. Write build instructions and publish.
+
+## 7. Later: possible full-spec version
+
+Not planned, kept for reference. A machine for 4" round plus square and rectangular tube was costed at about $2,600 ([bom.md](bom.md)). It would use a geared slewing ring with V-jaws and profile insert plates ([headstock.md](headstock.md)).
+
+Square tube needs a fourth axis to cut well. With the torch fixed over the centerline, the torch is square to a flat face only at mid-face; the cut edge is bevelled by up to 45° near the corners. A short Y axis lets each face be turned up and cut like flat plate. The controller card, PC, frame, gantry layout, and CAM tool would carry over.
 
 ## Sources
 
 - [QtPlasmaC with fourth axis, LinuxCNC forum](https://forum.linuxcnc.org/plasmac/49293-qtplasmac-with-fourth-axis-rotary)
-- [Rotary cutting square tube with PlasmaC, LinuxCNC forum](https://forum.linuxcnc.org/plasmac/41087-rotary-cutting-square-tube-with-plasmac?start=10)
 - [Feed rate priority on rotary and linear axis, LinuxCNC forum](https://www.forum.linuxcnc.org/38-general-linuxcnc-questions/32488-feed-rate-priority-on-rotary-and-linear-axis)
 - [Inverse time feed with 4th rotary axis, LinuxCNC forum](https://forum.linuxcnc.org/20-g-code/50870-inverse-time-feed-g93-ignored-with-4th-rotary-axis)
-- [THCAD-10, 5, or 300 for Powermax45 XP, LinuxCNC forum](https://www.forum.linuxcnc.org/plasmac/39999-thcad-10-5-or-300-for-hypertherm-powermax45-xp)
+- [Rotary cutting square tube with PlasmaC, LinuxCNC forum](https://forum.linuxcnc.org/plasmac/41087-rotary-cutting-square-tube-with-plasmac?start=10)

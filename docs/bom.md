@@ -4,9 +4,50 @@ Last updated 2026-11-10. This is a first pass for budgeting, not a shopping list
 
 **Only the rows marked "Checked" have a price read from a seller's page on 2026-11-10. Every other price is an estimate from general knowledge of the market and must be confirmed before ordering.** Shipping and tax are not included. The plasma cutter, torch, air supply, and a monitor and keyboard are assumed to be on hand.
 
-Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
+## The build: round only, 3" max
 
-## Controller and electrical
+Rough total **$1,200**. Same caveat: only "Checked" prices were read from a seller's page.
+
+| Item | Qty | Each | Total | Price status |
+|---|---|---|---|---|
+| Mesa 7i96S | 1 | $149 | $149 | Checked |
+| Open-loop NEMA 23 stepper with digital driver (X, Z, A) | 3 | $35 | $105 | Estimate |
+| NEMA 23 planetary gearbox for A | 1 | $27 | $27 | Checked (via search result) |
+| 48 V power supply | 1 | $35 | $35 | Estimate |
+| PC: spare or used | 1 | $60 | $60 | Estimate |
+| E-stop, relay, home switches, wiring | 1 | $80 | $80 | Estimate |
+| Float switch for touch-off (printed, with a microswitch) | 1 | $10 | $10 | Estimate |
+| CPC plug and wire, self-assembled | 1 | $20 | $20 | Estimate |
+| **Controller subtotal** | | | **$486** | |
+| K11-250 10" three-jaw chuck, 80 mm bore | 1 | $200 | $200 | Estimate. The 8" K11-200 was $102 to $142 (checked), no US price found for the 10". |
+| Rotating mount for the chuck: placeholder priced as routed ring, V-groove bearings, belt. A slewing ring or hollow rotary table would cost more. Open, see design.md 3.3. | 1 | $60 | $60 | Estimate |
+| Plate for ring and mount | 1 | $40 | $40 | Estimate |
+| Rotary ground clamp | 1 | $40 | $40 | Estimate |
+| **Headstock subtotal** | | | **$340** | |
+| X: aluminum V-slot extrusion, wheels, belt | 1 | $70 | $70 | Estimate |
+| Z slide, about 4" travel | 1 | $40 | $40 | Estimate |
+| Printed magnetic breakaway torch mount | 1 | $10 | $10 | Estimate |
+| **Gantry subtotal** | | | **$120** | |
+| Steel for frame | 1 | $150 | $150 | Estimate; less from the scrap rack |
+| Roller stands built from skate bearings | 4 | $10 | $40 | Estimate |
+| Steady rollers, tray, shields, fasteners | 1 | $70 | $70 | Estimate |
+| **Frame subtotal** | | | **$260** | |
+| **Total** | | | **$1,206** | |
+
+Later add-ons: THCAD2 arc-voltage height control ($79, checked), closed-loop motors (about $40 more per axis).
+
+## To confirm before buying
+
+1. The rotating mount for the chuck. Get quotes for a small slewing ring and for a hollow rotary table with a bore of 80 mm or more.
+2. K11-250 chuck: US price, bore, and back mounting bolt pattern.
+3. Gearbox ratio for the A axis, once the mount is chosen.
+4. Hypertherm CPC pinout for start and arc-OK signals.
+
+## Later: full-spec version (4" round, square and rectangular)
+
+Not planned. Kept for reference; rough total $2,639. See [design.md](design.md) section 7.
+
+### Controller and electrical
 
 | Item | Qty | Each | Total | Source | Price status |
 |---|---|---|---|---|---|
@@ -23,7 +64,7 @@ Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
 | Ohmic sensing: Hypertherm ohmic retaining cap plus isolated sense circuit, or a float switch | 1 | $80 | $80 | Hypertherm dealer | Estimate |
 | **Subtotal** | | | **$1,014** | | |
 
-## Headstock and chuck
+### Headstock and chuck
 
 | Item | Qty | Each | Total | Source | Price status |
 |---|---|---|---|---|---|
@@ -35,7 +76,7 @@ Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
 | Steel plate for faceplate, jaws, mount | 1 | $100 | $100 | Shop stock | Estimate |
 | **Subtotal** | | | **$715** | | |
 
-## Gantry
+### Gantry
 
 | Item | Qty | Each | Total | Source | Price status |
 |---|---|---|---|---|---|
@@ -46,7 +87,7 @@ Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
 | Magnetic breakaway torch mount | 1 | $60 | $60 | Purchased, or printed | Estimate |
 | **Subtotal** | | | **$360** | | |
 
-## Frame and supports
+### Frame and supports
 
 | Item | Qty | Each | Total | Source | Price status |
 |---|---|---|---|---|---|
@@ -56,7 +97,7 @@ Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
 | Slag tray, spark shields, fasteners | 1 | $100 | $100 | | Estimate |
 | **Subtotal** | | | **$550** | | |
 
-## Total
+### Total
 
 | | |
 |---|---|
@@ -65,55 +106,3 @@ Rough total: **$2,500 to $3,500**, dominated by the slewing ring's uncertainty.
 | Gantry | $360 |
 | Frame and supports | $550 |
 | **Total** | **$2,639** |
-
-Dropping the Y axis saves about $135.
-
-## Budget v1: round only, 3" max
-
-See [design.md](design.md) section 3.8. Rough total **$1,200**. Same caveat: only "Checked" prices were read from a seller's page.
-
-| Item | Qty | Each | Total | Price status |
-|---|---|---|---|---|
-| Mesa 7i96S | 1 | $149 | $149 | Checked |
-| Open-loop NEMA 23 stepper with digital driver (X, Z, A) | 3 | $35 | $105 | Estimate |
-| NEMA 23 planetary gearbox for A | 1 | $27 | $27 | Checked (via search result) |
-| 48 V power supply | 1 | $35 | $35 | Estimate |
-| PC: spare or used | 1 | $60 | $60 | Estimate |
-| E-stop, relay, home switches, wiring | 1 | $80 | $80 | Estimate |
-| Float switch for touch-off (printed, with a microswitch) | 1 | $10 | $10 | Estimate |
-| CPC plug and wire, self-assembled | 1 | $20 | $20 | Estimate |
-| **Controller subtotal** | | | **$486** | |
-| K11-250 10" three-jaw chuck, 80 mm bore | 1 | $200 | $200 | Estimate. The 8" K11-200 was $102 to $142 (checked), no US price found for the 10". |
-| V-groove bearings, timing belt, pulley for the rotating ring | 1 | $60 | $60 | Estimate |
-| Plate for ring and mount | 1 | $40 | $40 | Estimate |
-| Rotary ground clamp | 1 | $40 | $40 | Estimate |
-| **Headstock subtotal** | | | **$340** | |
-| X: aluminum V-slot extrusion, wheels, belt | 1 | $70 | $70 | Estimate |
-| Z slide, about 4" travel | 1 | $40 | $40 | Estimate |
-| Printed magnetic breakaway torch mount | 1 | $10 | $10 | Estimate |
-| **Gantry subtotal** | | | **$120** | |
-| Steel for frame | 1 | $150 | $150 | Estimate; less from the scrap rack |
-| Roller stands built from skate bearings | 4 | $10 | $40 | Estimate |
-| Steady rollers, tray, shields, fasteners | 1 | $70 | $70 | Estimate |
-| **Frame subtotal** | | | **$260** | |
-| **Total** | | | **$1,206** | |
-
-Later add-ons: THCAD2 arc-voltage height control ($79, checked), closed-loop motors (about $40 more per axis).
-
-Where the $1,400 saving comes from:
-
-| Change | Saves about |
-|---|---|
-| Lathe chuck on a routed ring instead of slewing ring and built jaws | $375 |
-| Open-loop motors, three axes instead of four | $185 |
-| No arc-voltage control or ohmic sensing at first; self-made cable | $190 |
-| V-wheel X axis, cheaper Z, printed torch mount | $240 |
-| Frame from stock, shop-built roller stands | $290 |
-| Cheaper PC and wiring allowance | $110 |
-
-## To confirm before buying
-
-1. Slewing ring: supplier drawing with bore, outside diameter, height, gear module and tooth count, bolt patterns, and runout. This choice drives the pinion, the faceplate, and the motor mount.
-2. Gearbox ratio for the A axis, once the ring's tooth count is known.
-3. THCAD2 range setting for the Powermax45 XP's divider card.
-4. Hypertherm part numbers for the ohmic retaining cap and CPC cable.

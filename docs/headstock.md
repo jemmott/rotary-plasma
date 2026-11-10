@@ -6,9 +6,13 @@ The headstock has two jobs that can be chosen separately: **rotate** (a hollow b
 
 ## Recommendation
 
-Geared slewing ring (A) with a plate faceplate, two self-centering V-jaws for round and square tube (G1), and plasma-cut profile insert plates for rectangular tube and volume runs (G3). Before ordering the ring, get a supplier drawing confirming bore, gear module, and bolt pattern.
+**Current build (round only, 3" max):** a K11-250 10" three-jaw lathe chuck (concept E below). What it rotates on is still open. In order of preference under the "boring, default parts" rule:
 
-If the slewing ring quote comes back high or the runout is poor, the fallback is the ring on rollers (C), which costs the least and uses only the router.
+1. A small slewing ring bolted to the back of the chuck (concept A, in a smaller size than the 4" machine needed), if a quote comes in reasonable.
+2. A purchased hollow rotary table with a bore of 80 mm or more, which would include the bearing and gear reduction in one unit. Not yet priced or checked for bore size.
+3. A routed ring on V-rollers with a belt (concept C). Cheapest, but shop-made and the least proven.
+
+The rest of this document compares concepts for the original full-spec machine (4" round plus square and rectangular) and is kept for reference.
 
 ## Rotation concepts
 
@@ -47,7 +51,7 @@ A routed aluminum ring, 3/8" or thicker, rides on three or four V-groove rollers
 
 Hollow chucks sold for plasma pipe cutting. Bulltear's Rotacut with an 8" four-jaw chuck was listed at $988 to $1,400 in an undated forum post; Precision Plasma sells one without a listed price. Units with a full 4" through-bore are uncommon. Worth one more look before committing to A, since it could save weeks.
 
-### E. Lathe chuck on a hollow spindle. Rejected for 4", proposed for the budget v1.
+### E. Lathe chuck on a hollow spindle. Rejected for 4", chosen for the round-only build.
 
 A 4" through-bore needs a chuck of 12" or more, weighing over 100 lb, and a machined spindle and backplate.
 
@@ -55,7 +59,7 @@ At 3" maximum and round tube only, this changes. A commodity K11-250 10" three-j
 
 No spindle is needed: the chuck bolts by its back face to a routed plate ring, and that ring is the rotating element, riding on V-rollers with a belt drive (concept C) or bolted to a smaller slewing ring (concept A). The chuck's own runout then matters less than how well the ring is centered on the chuck, which can be shimmed or dialed in once with an indicator.
 
-A three-jaw scroll chuck does not hold square or rectangular tube, so this is a round-only choice. See [design.md](design.md) section 3.8.
+A three-jaw scroll chuck does not hold square or rectangular tube, so this is a round-only choice.
 
 ## Gripping concepts
 
@@ -84,7 +88,7 @@ Clearance needed for weld seams and tube tolerance causes a small centering erro
 
 ## Square tube: how it is gripped depends on how it is cut
 
-See [design.md](design.md) section 3.3 for the indexed versus continuous comparison. Either method works with G1 or G3. Indexed cutting needs the faces to index squarely to the torch, so the chuck needs a repeatable angular zero: home the A axis, then set an offset per jaw type (45° for V-jaws).
+See [design.md](design.md) section 7 for why square tube needs a fourth axis. Either method works with G1 or G3. Indexed cutting needs the faces to index squarely to the torch, so the chuck needs a repeatable angular zero: home the A axis, then set an offset per jaw type (45° for V-jaws).
 
 ## Sources
 
