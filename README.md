@@ -13,20 +13,14 @@ An open-source, garage-scale CNC plasma tube cutter and coper. Standalone machin
 | Stock length | up to 20 ft, passing through the headstock |
 | Cut zone | 18" minimum |
 | Axes | X (along tube), A (rotation), Z (torch height) |
-| Budget | about $1,200 excluding the plasma cutter |
+| Budget | about $1,100 to $1,200 excluding the plasma cutter |
 | Torch | radial, no bevel. Reference build: Hypertherm Powermax45 XP machine torch |
 | Built with | plasma-cut plate, router-cut parts, 3D prints, bolts, purchased bearings. No lathe. |
 
-## Needed from the owner before the design is locked
+## Needed from the owner
 
-1. Result of the paper template test (print `examples/*.svg`, wrap, cut, fit).
-2. Is the torch shared with the CrossFire Pro, or does this machine get its own?
-3. Does the Powermax have the CPC port fitted?
-4. Spare PC with an Ethernet port, or buy one?
-5. Frame steel on hand (sizes), and what the router can cut (aluminum plate? how thick?).
-6. Where the machine goes: working height, and room past the cut zone for the longest finished part.
-7. Cut types wanted besides copes: straight cutoffs, miters, holes, slots?
-8. Is a 55 lb, roughly $200 chuck acceptable?
+1. Buy the K11-250 chuck and measure it: bore, and the bolt pattern on its back face.
+2. How tubes are modelled in Fusion: is each tube a hollow body already trimmed to its final shape?
 
 ## Docs
 

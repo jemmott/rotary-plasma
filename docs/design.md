@@ -21,7 +21,11 @@ Guiding rule from the owner: **boring, default parts.** Prefer the common catalo
 | Fabrication | plasma-cut plate (CrossFire Pro), 33" x 33" CNC router, Bambu P1S prints, MIG/TIG, bolt-together. No lathe. |
 | Controller | standalone and open. Not a Langmuir/FireControl add-on. |
 | Use | high volume, so loading and repeat cuts should be quick |
-| Budget | about $1,200 excluding the plasma cutter |
+| Budget | about $1,100 to $1,200 excluding the plasma cutter |
+| Torch | shared with the CrossFire Pro; comes off that table with one bolt, so this machine needs a matching quick mount and its own CPC cable |
+| Shop | frame steel is on hand in most gauges; SendCutSend is available for accurate laser-cut plates; a PC is on hand |
+| Placement | used on or beside the workbench, stored underneath, moved on wheels. Long infeed and outfeed runs are available. |
+| Part shapes | arbitrary cuts modelled in Fusion 360, not only standard copes |
 | Publication | open source, reproducible by someone with a similar shop |
 
 Not required: square or rectangular tube, 4" tube, parts catching, automatic clocking between the two ends of a long part (done by hand with an indicator and a level).
@@ -56,7 +60,19 @@ One key, self-centering, a standard part sold everywhere. About 55 lb. An 8" chu
 
 ### 3.3 How the chuck rotates. Open, and the main thing left to settle.
 
-The chuck needs a hollow bearing and a drive behind it, with no lathe work. Candidates, in [headstock.md](headstock.md): a small slewing ring bolted to the chuck's back, a purchased hollow rotary table, or a routed ring on V-rollers with a belt. The first two are the boring catalog parts and are preferred if the price is acceptable; they need quotes.
+The chuck needs a hollow bearing and a drive behind it, with no lathe work. What was found on 2026-11-10:
+
+| Candidate | Price found | What is known | What is missing |
+|---|---|---|---|
+| Small 011-series external-gear slewing ring | $119 (eBay) to $184 (AliExpress) | A standard catalog family; the gear is the final drive | Bore and gear data for the small sizes. The one row found, 011.20.200, has a 120 mm bore, 280 mm OD, module 3, 98 teeth, but weighs 24 kg, which is more than wanted. |
+| Hollow rotary table, 200 mm frame, 18:1 | $270 (eBay, ZBT200-18) to $449 | Bearing and low-backlash gearing in one unit | Through-hole size. Needs a NEMA 34 motor and driver (about $80 more). |
+| Laser-cut ring on rollers with a belt | about $60 | SendCutSend can cut the ring round and accurate | Shop-designed, so the least "default" option |
+
+Proposed: the smallest slewing ring with a bore of 85 mm or more, chosen from a seller's dimensioned drawing. A SendCutSend laser-cut steel plate adapts the chuck's bolt pattern to the ring, and a laser-cut or purchased pinion drives the gear. Fallback: the hollow rotary table if its through-hole is 85 mm or more.
+
+The chuck should be bought and measured first, since listings disagree on its mounting bolts.
+
+The headstock will weigh roughly 80 to 100 lb with either choice. The machine should live on its own wheeled cart at bench height, not be lifted on and off a bench.
 
 ### 3.4 Motion: open-loop NEMA 23 steppers, three axes. Decided.
 
@@ -79,9 +95,9 @@ The tube is clamped and supported close to the cut, so height should hold. Arc-v
 
 Cutting current must not return through the headstock bearing or the rollers: arcing pits bearing races. Use a rotary ground clamp or a sprung copper brush on the tube or chuck body.
 
-### 3.8 CAM: own tool. Decided.
+### 3.8 CAM: own tool, fed from Fusion 360. Decided; approach proposed.
 
-Fusion's plasma operations do not handle geometry wrapped around a tube. See [cam.md](cam.md).
+Fusion's plasma operations do not handle geometry wrapped around a tube. Parts are often unusual shapes, so the tool must take arbitrary cuts from a Fusion model, not just parametric copes. Plan in [cam.md](cam.md).
 
 ### 3.9 License. Decided.
 
@@ -97,7 +113,7 @@ MIT for software, CERN-OHL-P v2 for hardware.
 
 ## 5. Open questions
 
-For the owner: see the list in the README of things needed before the design is locked.
+For the owner: see the list in the README.
 
 Engineering:
 
@@ -110,9 +126,10 @@ Engineering:
 
 ## 6. Roadmap
 
-1. CAM spike: round-on-round cope, G-code and paper template. **Done** (untested on hardware).
-2. Validate the template by hand: print, wrap, cut, and fit a real joint.
-3. Settle the rotating mount; lock the design.
+1. CAM spike: round-on-round cope, G-code and paper template. **Done.**
+2. Validate the template by hand: print, wrap, cut, and fit a real joint. **Done by the owner, fit was good.**
+3. Buy and measure the chuck; get a slewing ring drawing; lock the headstock design.
+3a. CAM: Fusion 360 export of arbitrary cuts (in parallel with 3).
 4. Build the headstock alone. Check runout with an indicator, and accuracy with a pen in place of the torch drawing on paper wrapped around a tube.
 5. Gantry, controller, first cuts.
 6. CAM: full parts (two ends and length), straight and miter cuts, holes and slots, STEP import.

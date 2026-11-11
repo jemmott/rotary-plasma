@@ -67,6 +67,19 @@ cd cam && uv run --no-project --with pytest pytest
 
 The tests check the profile against the closed-form answer for a square joint, check in 3D that no part of the tube wall ends up inside the header, and check the kerf offset distance and the G-code structure.
 
+## Plan: arbitrary shapes from Fusion 360
+
+The owner models parts in Fusion, and the cuts are often unusual. The plan has two pieces:
+
+1. **A small Fusion script** (Fusion scripts are Python and run inside Fusion). The user selects a tube body. The script finds the tube's axis and its outer and inner cylindrical faces, samples every edge of those faces, and writes the edges as closed loops in unwrapped coordinates (distance along the tube, angle around it) to a JSON file. It does no CAM itself, so there is little in it to go wrong.
+2. **This tool** reads the loops and produces G-code and the wrap template, reusing the kerf, feed, and output code that exists now. The parametric cope stays as a second way in, and as a test case.
+
+Any shape works as long as the part is a round tube: copes onto anything, miters, holes, slots, windows.
+
+Because the torch is radial, the machine cannot reproduce a cut face that is not radial. Where the inner and outer edges of a modelled cut differ, the tool will remove whatever either one removes. That guarantees the part never interferes with its neighbour, at the cost of a small weld gap, which is the same rule the cope tool uses today.
+
+STEP import would do the same job without Fusion but needs a CAD kernel as a dependency. It is deferred until someone needs it.
+
 ## Not done yet
 
 - A whole part: two ends, length between them, and clocking of one end to the other
