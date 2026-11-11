@@ -17,13 +17,9 @@ An open-source, garage-scale CNC plasma tube cutter and coper. Standalone machin
 | Torch | radial, no bevel. Reference build: Hypertherm Powermax45 XP machine torch |
 | Built with | plasma-cut plate, router-cut parts, 3D prints, bolts, purchased bearings. No lathe. |
 
-## Needed from the owner
-
-1. Buy the K11-250 chuck and measure it: bore, and the bolt pattern on its back face.
-2. How tubes are modelled in Fusion: is each tube a hollow body already trimmed to its final shape?
-
 ## Docs
 
+- [docs/status.md](docs/status.md): **start here.** Current state, what we are waiting on, next steps
 - [docs/design.md](docs/design.md): requirements, architecture, decisions, open questions
 - [docs/headstock.md](docs/headstock.md): headstock and chuck concepts compared, with rough costs
 - [docs/bom.md](docs/bom.md): draft bill of materials with prices
