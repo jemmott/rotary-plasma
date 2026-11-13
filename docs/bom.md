@@ -1,29 +1,31 @@
 # Draft BOM
 
-Last updated 2026-11-10. This is a first pass for budgeting, not a shopping list.
+Last updated 2026-11-12. This is a first pass for budgeting, not a shopping list.
 
 **Only the rows marked "Checked" have a price read from a seller's page on 2026-11-10. Every other price is an estimate from general knowledge of the market and must be confirmed before ordering.** Shipping and tax are not included. The plasma cutter, torch, air supply, and a monitor and keyboard are assumed to be on hand.
 
 ## The build: round only, 3" max
 
-Rough total **$1,130**. Same caveat: only "Checked" prices were read from a seller's page.
+Rough total **$1,170**. Same caveat: only "Checked" prices were read from a seller's page.
 
 | Item | Qty | Each | Total | Price status |
 |---|---|---|---|---|
 | Mesa 7i96S | 1 | $149 | $149 | Checked |
 | Open-loop NEMA 23 stepper with digital driver (X, Z, A) | 3 | $35 | $105 | Estimate |
-| NEMA 23 planetary gearbox for A | 1 | $27 | $27 | Checked (via search result) |
+| NEMA 23 planetary gearbox for A, 5:1 (or buy the A motor as a geared unit, StepperOnline 23HS22-2804S-HG5; price not checked) | 1 | $27 | $27 | Checked (via search result) |
 | 48 V power supply | 1 | $35 | $35 | Estimate |
 | PC: owner has one. It must be a PC (not a Mac), dedicated to the machine, running Linux, with an Ethernet port. | 1 | $0 | $0 | On hand |
 | E-stop, relay, home switches, wiring | 1 | $80 | $80 | Estimate |
 | Float switch for touch-off (printed, with a microswitch) | 1 | $10 | $10 | Estimate |
 | Second CPC plug and cable, self-assembled (the existing one stays wired to the CrossFire) | 1 | $20 | $20 | Estimate |
 | **Controller subtotal** | | | **$426** | |
-| K11-250 10" three-jaw chuck, 80 mm bore, about 49 lb, three M10 or M12 mounting bolts depending on listing | 1 | $200 | $200 | Estimate. The 8" K11-200 was $102 to $142 (checked), no US price found for the 10". |
-| Small external-gear slewing ring, 011 series, bore 85 mm or more | 1 | $150 | $150 | Checked range: $119 (eBay, 011.10.100) to $184 (AliExpress). Dimensions not confirmed. |
-| Laser-cut steel adapter plates and pinion from SendCutSend | 1 | $80 | $80 | Estimate |
+| K11-250 10" three-jaw chuck, 80 mm bore, 49 lb, three M12 mounting bolts | 1 | $200 | $200 | Bought. Price paid not recorded. |
+| Slewing ring 011.10.150, external gear, plain holes, 100 mm bore | 1 | $150 | $150 | Ordered. Price paid not recorded. |
+| Laser-cut steel adapter plate, spacer ring, and frame plate from SendCutSend | 1 | $80 | $80 | Estimate |
+| Module 2, 20-tooth steel pinion, 14 mm bore with keyway | 1 | $20 | $20 | Estimate. A 12 mm bore KHK SS2-20 was $30 at Zoro (checked 2026-11-12). |
+| Dial indicator and magnetic base, to centre the chuck | 1 | $25 | $25 | Estimate |
 | Rotary ground clamp | 1 | $40 | $40 | Estimate |
-| **Headstock subtotal** | | | **$470** | |
+| **Headstock subtotal** | | | **$515** | |
 | X: aluminum V-slot extrusion, wheels, belt | 1 | $70 | $70 | Estimate |
 | Z slide, about 4" travel | 1 | $40 | $40 | Estimate |
 | Printed magnetic breakaway torch mount | 1 | $10 | $10 | Estimate |
@@ -32,16 +34,15 @@ Rough total **$1,130**. Same caveat: only "Checked" prices were read from a sell
 | Roller stands built from skate bearings | 4 | $10 | $40 | Estimate |
 | Steady rollers, tray, shields, fasteners | 1 | $70 | $70 | Estimate |
 | **Frame subtotal** | | | **$110** | |
-| **Total** | | | **$1,126** | |
+| **Total** | | | **$1,171** | |
 
 Later add-ons: THCAD2 arc-voltage height control ($79, checked), closed-loop motors (about $40 more per axis).
 
 ## To confirm before buying
 
-1. Slewing ring: a dimensioned drawing from the seller showing a bore of 85 mm or more, plus gear module, tooth count, bolt circles, and weight. Do not order from a listing without one.
-2. K11-250 chuck: buy it first and measure the bore and the back mounting pattern; listings disagree on M10 versus M12.
-3. Gearbox ratio for the A axis, once the mount is chosen.
-4. Hypertherm CPC pinout for start and arc-OK signals.
+1. Slewing ring: measure it against the table in [status.md](status.md) before cutting plates.
+2. Geared motor: shaft diameter, keyway, and mounting holes, before buying the pinion and cutting the frame plate.
+3. Hypertherm CPC pinout for start and arc-OK signals.
 
 ## Later: full-spec version (4" round, square and rectangular)
 

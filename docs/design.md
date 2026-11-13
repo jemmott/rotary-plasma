@@ -1,6 +1,6 @@
 # Design
 
-Last updated 2026-11-10. Status: nothing built yet.
+Last updated 2026-11-12. Status: nothing built yet.
 
 Each decision is marked **Decided**, **Proposed** (a recommendation waiting for a yes), or **Open**.
 
@@ -54,25 +54,17 @@ Accuracy target (proposed): cut edge within ±0.5 mm (0.020") of intended, so co
 
 Round only removes a fourth axis and all square-tube handling, and lets a self-centering lathe chuck do the gripping. 3" is the largest tube that fits a commodity 10" chuck.
 
-### 3.2 Chuck: K11-250 10" three-jaw self-centering lathe chuck, 80 mm bore. Proposed.
+### 3.2 Chuck: K11-250 10" three-jaw self-centering lathe chuck, 80 mm bore. Decided.
 
-One key, self-centering, a standard part sold everywhere. About 55 lb. An 8" chuck is cheaper but its 65 mm bore is too tight for 2.5" tube.
+One key, self-centering, a standard part sold everywhere. 49 lb. An 8" chuck is cheaper but its 65 mm bore is too tight for 2.5" tube.
 
-### 3.3 How the chuck rotates. Open, and the main thing left to settle.
+### 3.3 How the chuck rotates: 011.10.150 slewing ring with a pinion. Decided.
 
-The chuck needs a hollow bearing and a drive behind it, with no lathe work. What was found on 2026-11-10:
+An 011.10.150 external-gear slewing ring (100 mm bore, 105 teeth, module 2, 5.5 kg) bolts between the chuck and the frame through laser-cut plates. A 20-tooth pinion on a 5:1 geared NEMA 23 drives it at 26.25:1. Design and assembly order are in [headstock.md](headstock.md).
 
-| Candidate | Price found | What is known | What is missing |
-|---|---|---|---|
-| Small 011-series external-gear slewing ring | $119 (eBay) to $184 (AliExpress) | A standard catalog family; the gear is the final drive | Bore and gear data for the small sizes. The one row found, 011.20.200, has a 120 mm bore, 280 mm OD, module 3, 98 teeth, but weighs 24 kg, which is more than wanted. |
-| Hollow rotary table, 200 mm frame, 18:1 | $270 (eBay, ZBT200-18) to $449 | Bearing and low-backlash gearing in one unit | Through-hole size. Needs a NEMA 34 motor and driver (about $80 more). |
-| Laser-cut ring on rollers with a belt | about $60 | SendCutSend can cut the ring round and accurate | Shop-designed, so the least "default" option |
+The alternatives looked at were a hollow rotary table ($554 and up for units found, through-hole unclear) and a shop-made ring on rollers.
 
-Proposed: the smallest slewing ring with a bore of 85 mm or more, chosen from a seller's dimensioned drawing. A SendCutSend laser-cut steel plate adapts the chuck's bolt pattern to the ring, and a laser-cut or purchased pinion drives the gear. Fallback: the hollow rotary table if its through-hole is 85 mm or more.
-
-The chuck should be bought and measured first, since listings disagree on its mounting bolts.
-
-The headstock will weigh roughly 80 to 100 lb with either choice. The machine should live on its own wheeled cart at bench height, not be lifted on and off a bench.
+The chuck and ring together weigh about 61 lb. The machine should still live on its own wheeled cart at bench height.
 
 ### 3.4 Motion: open-loop NEMA 23 steppers, three axes. Decided.
 
@@ -106,8 +98,8 @@ MIT for software, CERN-OHL-P v2 for hardware.
 ## 4. Sizing notes
 
 - **A-axis speed:** surface speed equals cut speed. 1" tube cut at 150 in/min turns at 48 rpm; 3" at 60 in/min turns at 6 rpm. Small thin tube sets the top speed.
-- **A-axis ratio:** about 20:1 to 25:1 from motor to chuck. At 25:1, 48 rpm is 1200 motor rpm, which is near the limit for an open-loop stepper on 48 V; 16 gauge on 1" tube may need a lower ratio or a slower cut. To be checked when the drive is chosen.
-- **Resolution:** at 25:1 and 1/8 microstepping, one step is 0.0002" on the surface of a 3" tube.
+- **A-axis ratio:** 26.25:1 from motor to chuck. At that ratio, 48 rpm is 1260 motor rpm, which is near the limit for an open-loop stepper on 48 V; 16 gauge on 1" tube may need a lower ratio or a slower cut. To be checked when the drive is chosen.
+- **Resolution:** at about 25:1 and 1/8 microstepping, one step is 0.0002" on the surface of a 3" tube.
 - **Z travel:** 4" covers 1" to 3" tube with clearance.
 - **X travel:** 24" gives the 18" cut zone plus lead-ins and parking.
 
@@ -117,7 +109,7 @@ For the owner: see the list in the README.
 
 Engineering:
 
-1. Rotating mount for the chuck (section 3.3): quotes and choice.
+1. Headstock details still open: see [headstock.md](headstock.md).
 2. Does QtPlasmaC accept G93 inverse-time moves?
 3. Open-loop stepper speed for small thin tube (section 4).
 4. A-axis home and a repeatable zero.

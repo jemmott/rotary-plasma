@@ -1,16 +1,62 @@
 # Headstock and chuck concepts
 
-Last updated 2026-11-10. Costs are rough; see [bom.md](bom.md) for which prices were checked.
+Costs are rough; see [bom.md](bom.md) for which prices were checked.
 
 The headstock has two jobs that can be chosen separately: **rotate** (a hollow bearing with a drive) and **grip** (a chuck on its face). It needs a clear bore of about 130 mm, must be buildable without a lathe, and must clamp close to the torch.
 
-## Recommendation
+## Current design (round only, 3" max)
 
-**Current build (round only, 3" max):** a K11-250 10" three-jaw lathe chuck (concept E below). What it rotates on is still open. In order of preference under the "boring, default parts" rule:
+Last updated 2026-11-12. Drawn from the measured chuck and a supplier's table for the ring. **Nothing is cut until the ring is measured.** The plates come from `headstock/plates.py`, which writes DXFs to `headstock/out/`; change a number at the top and re-run.
 
-1. A small slewing ring bolted to the back of the chuck (concept A, in a smaller size than the 4" machine needed), if a quote comes in reasonable.
-2. A purchased hollow rotary table with a bore of 80 mm or more, which would include the bearing and gear reduction in one unit. Not yet priced or checked for bore size.
-3. A routed ring on V-rollers with a belt (concept C). Cheapest, but shop-made and the least proven.
+### Parts
+
+| Part | What | Status |
+|---|---|---|
+| Chuck | K11-250, 3 x M12 on a 226 mm circle, 49 lb | In hand, measured |
+| Slewing ring | 011.10.150, plain holes: 100 mm bore, 105 teeth module 2, 5.5 kg | Ordered |
+| Adapter plate | 3/8" steel disc, 250 mm OD, 150 mm ID. 3 x M12 countersunk, 8 x M8 tapped on 180 mm | Drawn |
+| Spacer ring | 1/4" steel, between the ring's inner race and the frame plate | Drawn |
+| Frame plate | 1/4" steel, 380 x 320 mm placeholder outline | Drawn, except motor holes |
+| Motor | NEMA 23 with 5:1 planetary gearbox (StepperOnline 23HS22-2804S-HG5: 14 mm keyed shaft, 34 mm long, backlash 30 arc-min or less) | To order |
+| Pinion | Module 2, 20 teeth, 20 mm face, 14 mm bore with keyway | To order once the motor shaft is measured |
+
+Drive ratio: 5 x 105 / 20 = **26.25:1**. Centre distance between ring and pinion is 125 mm.
+
+### Stack-up, back to front
+
+```
+ motor+gearbox | frame plate | spacer | ring inner race (fixed)
+               |   6.35      |  6.35  |    ring outer race (turns, 5 mm further forward) | adapter plate 9.5 | chuck
+```
+
+- The ring's two races are each 25 mm tall and offset 5 mm, so the outer race stands proud at the front and the inner race at the back.
+- The spacer makes the gap behind the outer race 11.35 mm, which clears the 8 mm heads of the M8 bolts that turn with it.
+- The adapter plate's 150 mm hole and the chuck's 5.9 mm back recess leave about 20 mm for the inner-race bolt heads.
+- The pinion shaft comes through a 50 mm opening in the frame plate. The shaft ends 34 mm from the gearbox face, which reaches about 16 mm into the 20 mm tooth width if the teeth start at the back of the outer race. Check on the real ring.
+
+### Why the bolts go where they do
+
+The chuck's M12 bolts sit at 113 mm radius and the gear teeth reach 107 mm, so a normal bolt head behind the adapter plate would hit the teeth and the pinion. The M12s are flat-head screws countersunk flush into the back of the plate, and they must go in before the ring covers them. The ring then bolts on from behind, which is why it needs plain holes and the plate needs tapped ones.
+
+### Assembly order
+
+1. Chuck face down on the bench. Adapter plate on its back, 3 x M12 flat-head screws, flush.
+2. Separately: ring on the frame plate with the spacer between, 8 x M8 x 50 from the front through the inner race, nuts behind the frame plate.
+3. Lower the frame plate and ring onto the adapter plate. Through the 18 mm access hole in the frame plate, fit 8 x M8 x 35 socket-head bolts through the outer race into the adapter plate, turning the ring to reach each one. Leave them snug.
+4. Stand it up. Clamp a straight tube, put a dial indicator on it, and tap the chuck until it runs true. The 9 mm ring holes give about 0.5 mm of adjustment each way. Tighten through the access hole.
+5. Fit the motor and pinion; set the mesh with the motor's slotted mount.
+
+There is no centering boss: step 4 centres everything at once, including the chuck's own jaw error.
+
+### Still open
+
+- **Who cuts what.** The owner can tap and countersink, and has the CNC plasma table. The adapter plate sets how true the chuck runs and has tapped holes, so laser cut it in steel at SendCutSend, then countersink the three M12 holes (24 mm head) in the shop; tap the M8s there too, or have SendCutSend do it. The frame plate and spacer ring only have clearance holes, so they can be plasma cut in the shop with the holes drilled or reamed to size.
+- **Motor mounting holes** in the frame plate, slotted for mesh adjustment: drawn once the gearbox is in hand.
+- **Frame plate outline** depends on the frame, which is not drawn.
+- **M12 screw length:** measure the thread depth in the chuck. Probably M12 x 30.
+- **Home switch** for a repeatable A zero.
+
+## Other concepts considered
 
 The rest of this document compares concepts for the original full-spec machine (4" round plus square and rectangular) and is kept for reference.
 
