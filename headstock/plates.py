@@ -25,7 +25,7 @@ RING_OUTER_BOLT_CIRCLE = 180  # 8 x 9 mm plain holes, outer (geared) ring
 RING_TEETH = 105
 MODULE = 2
 
-# Drive: 20-tooth module 2 pinion on a 5:1 geared NEMA 23.
+# Drive: 20-tooth module 2 pinion on a geared NEMA 23 (23HS22-2804S-PG4, 4.25:1).
 PINION_TEETH = 20
 CENTER_DISTANCE = MODULE * (RING_TEETH + PINION_TEETH) / 2  # 125
 

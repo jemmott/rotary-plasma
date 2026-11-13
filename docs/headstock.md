@@ -17,10 +17,10 @@ Last updated 2026-11-12. Drawn from the measured chuck and a supplier's table fo
 | Adapter plate | 3/8" steel disc, 250 mm OD, 150 mm ID. 3 x M12 countersunk, 8 x M8 tapped on 180 mm | Drawn |
 | Spacer ring | 1/4" steel, between the ring's inner race and the frame plate | Drawn |
 | Frame plate | 1/4" steel, 380 x 320 mm placeholder outline | Drawn, except motor holes |
-| Motor | NEMA 23 with 5:1 planetary gearbox (StepperOnline 23HS22-2804S-HG5: 14 mm keyed shaft, 34 mm long, backlash 30 arc-min or less) | To order |
-| Pinion | Module 2, 20 teeth, 20 mm face, 14 mm bore with keyway | To order once the motor shaft is measured |
+| Motor | NEMA 23 with planetary gearbox, StepperOnline 23HS22-2804S-PG4: actual ratio 4.25:1, 12 mm shaft with 4 mm key, 30 mm long, 2.8 A. Listings give backlash as 1.5 or 3 degrees; measure it. | Ordered 2026-11-12 |
+| Pinion | Module 2, 20 teeth, 20 mm face, 12 mm bore with keyway or set screws | To order once the motor shaft is measured |
 
-Drive ratio: 5 x 105 / 20 = **26.25:1**. Centre distance between ring and pinion is 125 mm.
+Drive ratio: 4.25 x 105 / 20 = **22.3125:1**. Gearbox backlash of 1.5 to 3 degrees is 0.19 to 0.38 mm at the surface of a 3" tube, on cuts where the chuck reverses; LinuxCNC backlash compensation should take out most of it. The 5:1 high-precision version (HG5, 0.5 degrees) was $130 to $180 delivered and is the upgrade if this is not good enough. Centre distance between ring and pinion is 125 mm.
 
 ### Stack-up, back to front
 
@@ -32,7 +32,7 @@ Drive ratio: 5 x 105 / 20 = **26.25:1**. Centre distance between ring and pinion
 - The ring's two races are each 25 mm tall and offset 5 mm, so the outer race stands proud at the front and the inner race at the back.
 - The spacer makes the gap behind the outer race 11.35 mm, which clears the 8 mm heads of the M8 bolts that turn with it.
 - The adapter plate's 150 mm hole and the chuck's 5.9 mm back recess leave about 20 mm for the inner-race bolt heads.
-- The pinion shaft comes through a 50 mm opening in the frame plate. The shaft ends 34 mm from the gearbox face, which reaches about 16 mm into the 20 mm tooth width if the teeth start at the back of the outer race. Check on the real ring.
+- The pinion shaft comes through a 50 mm opening in the frame plate. The shaft ends 30 mm from the gearbox face, which reaches about 12 mm into the 20 mm tooth width if the teeth start at the back of the outer race. Check on the real ring.
 
 ### Why the bolts go where they do
 
@@ -40,7 +40,7 @@ The chuck's M12 bolts sit at 113 mm radius and the gear teeth reach 107 mm, so a
 
 ### Assembly order
 
-1. Chuck face down on the bench. Adapter plate on its back, 3 x M12 flat-head screws, flush.
+1. Chuck face down on the bench. Adapter plate on its back, 3 x M12 x 30 flat-head screws (90 degree head, 24 mm across), flush. The chuck threads are 34.5 mm deep, so these engage about 20 mm.
 2. Separately: ring on the frame plate with the spacer between, 8 x M8 x 50 from the front through the inner race, nuts behind the frame plate.
 3. Lower the frame plate and ring onto the adapter plate. Through the 18 mm access hole in the frame plate, fit 8 x M8 x 35 socket-head bolts through the outer race into the adapter plate, turning the ring to reach each one. Leave them snug.
 4. Stand it up. Clamp a straight tube, put a dial indicator on it, and tap the chuck until it runs true. The 9 mm ring holes give about 0.5 mm of adjustment each way. Tighten through the access hole.
@@ -53,7 +53,6 @@ There is no centering boss: step 4 centres everything at once, including the chu
 - **Who cuts what.** The owner can tap and countersink, and has the CNC plasma table. The adapter plate sets how true the chuck runs and has tapped holes, so laser cut it in steel at SendCutSend, then countersink the three M12 holes (24 mm head) in the shop; tap the M8s there too, or have SendCutSend do it. The frame plate and spacer ring only have clearance holes, so they can be plasma cut in the shop with the holes drilled or reamed to size.
 - **Motor mounting holes** in the frame plate, slotted for mesh adjustment: drawn once the gearbox is in hand.
 - **Frame plate outline** depends on the frame, which is not drawn.
-- **M12 screw length:** measure the thread depth in the chuck. Probably M12 x 30.
 - **Home switch** for a repeatable A zero.
 
 ## Other concepts considered

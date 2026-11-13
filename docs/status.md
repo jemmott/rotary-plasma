@@ -28,13 +28,28 @@ The chuck arrived and matches the standard K11-250 back-mount pattern.
 | Body thickness | 80 mm (80.79 measured), without jaws | Paperwork and calipers |
 | Weight | 49 lb (listing); box says 50 lb with wrench and packaging | Listing, not weighed |
 
+## Ordered, not yet arrived (2026-11-12)
+
+- Slewing ring 011.10.150.
+- A motor: StepperOnline 23HS22-2804S-PG4 (geared, 4.25:1).
+- X and Z motors: 3-pack of 23HS22-2804S (one spare).
+- Drivers: 3 x DM542TE.
+- 48 V DC supply (Mean Well LRS-350-48 was recommended). Trim to about 45 V before connecting drivers.
+
+- Mesa 7i96S.
+- Dial indicator.
+- CPC connector from Digi-Key, same parts as the working CrossFire cable: plug 206044-1, pins 1-66359-4, cable clamp 1-206070-1.
+- M12 x 30 flat-head screws, if the owner included them (not confirmed).
+
+Not ordered: pinion, fasteners (3 x M12 x 30 flat head, 8 x M8 x 35 socket head, 8 x M8 x 50 with nuts), 5 V and field supplies for the Mesa card, everything for the gantry.
+
 ## Next steps, in order
 
 1. **Measure the slewing ring when it arrives** (011.10.150, ordered 2026-11-12) against the table under open risks: bore, bolt circles, hole size, race heights and offset, and where the teeth sit across the height. Update `headstock/plates.py` if anything differs.
-2. **Order the A motor** (5:1 geared NEMA 23), then measure its shaft and mounting holes. Buy the pinion to suit and add the motor holes to the frame plate.
+2. **Measure the A motor when it arrives** (23HS22-2804S-PG4, ordered 2026-11-12): shaft, key, mounting holes, and backlash at the output with the motor powered. Buy the pinion to suit and add the motor holes to the frame plate.
 3. **Cut the plates** after 1 and 2: adapter plate by laser at SendCutSend, frame plate and spacer on the plasma table. The headstock design is in [headstock.md](headstock.md); DXFs come from `python headstock/plates.py`.
 4. **CAM for arbitrary shapes from Fusion 360.** This does not depend on hardware and can start any time. Plan in [cam.md](cam.md): a small Fusion script exports the cut edges of a selected tube body as unwrapped loops, and the existing tool turns loops into G-code and a template. The owner confirmed tubes are modelled as hollow bodies. The Fusion script can only be tested by the owner running it inside Fusion.
-5. Gantry, frame, torch quick mount (must match the one-bolt mount on the CrossFire Pro), second CPC cable, controller.
+5. Gantry, frame, torch mount, second CPC cable, controller. The machine torch barrel is 1.35" (34.3 mm) OD with a rack gear along its length; the CrossFire Pro holds it in two custom aluminum ring clamps. There is no force on it, so this machine gets its own simple clamp that clears the rack, on a printed magnetic breakaway. When wiring the CPC cable, copy the existing CrossFire cable pin for pin.
 
 ## Open risks
 
@@ -47,5 +62,4 @@ The chuck arrived and matches the standard K11-250 back-mount pattern.
 ## Housekeeping
 
 - Everything is committed on `main`. The public repo is https://github.com/jemmott/rotary-plasma.
-- The CERN-OHL-P v2 license text still needs adding before publishing.
 - Tests: `cd cam && uv run --no-project --with pytest pytest` (6 pass) and the same in `headstock` (4 pass).

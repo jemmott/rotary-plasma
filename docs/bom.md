@@ -6,23 +6,23 @@ Last updated 2026-11-12. This is a first pass for budgeting, not a shopping list
 
 ## The build: round only, 3" max
 
-Rough total **$1,170**. Same caveat: only "Checked" prices were read from a seller's page.
+Rough total **$1,200**. Same caveat: only "Checked" prices were read from a seller's page.
 
 | Item | Qty | Each | Total | Price status |
 |---|---|---|---|---|
 | Mesa 7i96S | 1 | $149 | $149 | Checked |
-| Open-loop NEMA 23 stepper with digital driver (X, Z, A) | 3 | $35 | $105 | Estimate |
-| NEMA 23 planetary gearbox for A, 5:1 (or buy the A motor as a geared unit, StepperOnline 23HS22-2804S-HG5; price not checked) | 1 | $27 | $27 | Checked (via search result) |
-| 48 V power supply | 1 | $35 | $35 | Estimate |
+| NEMA 23 steppers 23HS22-2804S (X, Z, one spare) and three DM542TE drivers | 3 | $35 | $105 | Ordered. Estimate; price paid not recorded. |
+| Geared A motor, StepperOnline 23HS22-2804S-PG4 (4.25:1), replaces one plain motor and the separate gearbox | 1 | $55 | $55 | Ordered. $54.79 listed 2026-11-12; price paid not recorded. |
+| 48 V power supply, about 350 W | 1 | $35 | $35 | Ordered. Estimate; price paid not recorded. |
 | PC: owner has one. It must be a PC (not a Mac), dedicated to the machine, running Linux, with an Ethernet port. | 1 | $0 | $0 | On hand |
 | E-stop, relay, home switches, wiring | 1 | $80 | $80 | Estimate |
 | Float switch for touch-off (printed, with a microswitch) | 1 | $10 | $10 | Estimate |
 | Second CPC plug and cable, self-assembled (the existing one stays wired to the CrossFire) | 1 | $20 | $20 | Estimate |
-| **Controller subtotal** | | | **$426** | |
+| **Controller subtotal** | | | **$454** | |
 | K11-250 10" three-jaw chuck, 80 mm bore, 49 lb, three M12 mounting bolts | 1 | $200 | $200 | Bought. Price paid not recorded. |
 | Slewing ring 011.10.150, external gear, plain holes, 100 mm bore | 1 | $150 | $150 | Ordered. Price paid not recorded. |
 | Laser-cut steel adapter plate, spacer ring, and frame plate from SendCutSend | 1 | $80 | $80 | Estimate |
-| Module 2, 20-tooth steel pinion, 14 mm bore with keyway | 1 | $20 | $20 | Estimate. A 12 mm bore KHK SS2-20 was $30 at Zoro (checked 2026-11-12). |
+| Module 2, 20-tooth steel pinion, 12 mm bore with keyway or set screws | 1 | $20 | $20 | Estimate. A plain-bore 12 mm KHK SS2-20 was $30 at Zoro (checked 2026-11-12). |
 | Dial indicator and magnetic base, to centre the chuck | 1 | $25 | $25 | Estimate |
 | Rotary ground clamp | 1 | $40 | $40 | Estimate |
 | **Headstock subtotal** | | | **$515** | |
@@ -34,7 +34,7 @@ Rough total **$1,170**. Same caveat: only "Checked" prices were read from a sell
 | Roller stands built from skate bearings | 4 | $10 | $40 | Estimate |
 | Steady rollers, tray, shields, fasteners | 1 | $70 | $70 | Estimate |
 | **Frame subtotal** | | | **$110** | |
-| **Total** | | | **$1,171** | |
+| **Total** | | | **$1,199** | |
 
 Later add-ons: THCAD2 arc-voltage height control ($79, checked), closed-loop motors (about $40 more per axis).
 

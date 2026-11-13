@@ -60,7 +60,7 @@ One key, self-centering, a standard part sold everywhere. 49 lb. An 8" chuck is 
 
 ### 3.3 How the chuck rotates: 011.10.150 slewing ring with a pinion. Decided.
 
-An 011.10.150 external-gear slewing ring (100 mm bore, 105 teeth, module 2, 5.5 kg) bolts between the chuck and the frame through laser-cut plates. A 20-tooth pinion on a 5:1 geared NEMA 23 drives it at 26.25:1. Design and assembly order are in [headstock.md](headstock.md).
+An 011.10.150 external-gear slewing ring (100 mm bore, 105 teeth, module 2, 5.5 kg) bolts between the chuck and the frame through laser-cut plates. A 20-tooth pinion on a geared NEMA 23 (4.25:1) drives it at 22.3:1. Design and assembly order are in [headstock.md](headstock.md).
 
 The alternatives looked at were a hollow rotary table ($554 and up for units found, through-hole unclear) and a shop-made ring on rollers.
 
@@ -98,7 +98,7 @@ MIT for software, CERN-OHL-P v2 for hardware.
 ## 4. Sizing notes
 
 - **A-axis speed:** surface speed equals cut speed. 1" tube cut at 150 in/min turns at 48 rpm; 3" at 60 in/min turns at 6 rpm. Small thin tube sets the top speed.
-- **A-axis ratio:** 26.25:1 from motor to chuck. At that ratio, 48 rpm is 1260 motor rpm, which is near the limit for an open-loop stepper on 48 V; 16 gauge on 1" tube may need a lower ratio or a slower cut. To be checked when the drive is chosen.
+- **A-axis ratio:** 22.3:1 from motor to chuck. At that ratio, 48 rpm is 1070 motor rpm, which is near the limit for an open-loop stepper on 48 V; 16 gauge on 1" tube may need a lower ratio or a slower cut. To be checked when the drive is chosen.
 - **Resolution:** at about 25:1 and 1/8 microstepping, one step is 0.0002" on the surface of a 3" tube.
 - **Z travel:** 4" covers 1" to 3" tube with clearance.
 - **X travel:** 24" gives the 18" cut zone plus lead-ins and parking.
